@@ -4,11 +4,9 @@ import {
   ModalHeader,
   ModalContent,
   ModalBody,
-  ModalFooter,
   ModalCloseButton,
   Heading,
-  Button,
-  VStack
+  Button
 } from "@chakra-ui/react"
 import { FiPlus } from "react-icons/fi"
 import { useState, useEffect } from "react"
@@ -23,8 +21,8 @@ const LanguageModal: React.FC = () => {
   const { languageModalOpen } = useAppSelector((state) => state.ui)
   const { jwt } = useAppSelector((state) => state.auth)
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<boolean>(false)
+  //const [loading, setLoading] = useState<boolean>(true)
+  //const [error, setError] = useState<boolean>(false)
   const [languages, setLanguages] = useState<ILanguage[]>([])
   const [selected, setSelected] = useState<string>("")
 
@@ -42,9 +40,9 @@ const LanguageModal: React.FC = () => {
           dispatch(logout())
           return
         }
-        setError(true)
+        //setError(true)
       })
-      .finally(() => setLoading(false))
+    //.finally(() => setLoading(false))
   }, [jwt])
 
   return (

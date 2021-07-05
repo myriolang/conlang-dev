@@ -1,6 +1,6 @@
 import PageWrapper from "../components/ui/PageWrapper"
 import PageHeading from "../components/ui/PageHeading"
-import { Box, Heading, Text } from "@chakra-ui/react"
+import { Text } from "@chakra-ui/react"
 import { useAppSelector } from "../store"
 
 const Index: React.FC = () => {

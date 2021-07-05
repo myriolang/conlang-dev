@@ -8,7 +8,7 @@ import {
   Icon,
   Spinner
 } from "@chakra-ui/react"
-import { FiX, FiCheck } from "react-icons/fi"
+import { FiX } from "react-icons/fi"
 import { useEffect, useState } from "react"
 import api from "../../utils/axios"
 import axios from "axios"
