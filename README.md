@@ -1,10 +1,12 @@
 <div align="center">
 <br><div><img height="118" src="public/conlang-dev-logo.svg" alt="conlang.dev"/></div>
-<br><br><br>
-[![Build status][shields-ci]][github-ci]
-</div>
+<br>
 
+[![Build status][shields-ci]][github-ci]
+
+<br><br>
 **conlang.dev** is a tool for conlangers and linguists to document their languages.
+</div>
 
 ## 🐻 Project Overview
 This project uses
@@ -18,7 +20,7 @@ This project uses
 * [axios][axios] for API communication with the back-end
 
 ## 🛣️ Roadmap
-Find the full roadmap on [Trello][https://trello.com/b/prSeXglQ]
+Find the full roadmap on [Trello][trello]
 
 ## 🏄 Setup
 To get the project set up locally, just clone, install and Bob's yer (figurative) uncle.
@@ -42,3 +44,4 @@ You can run the development server with `yarn dev`. All code should pass linting
 [eslint]: https://eslint.org/
 [prettier]: https://prettier.io/
 [icons]: https://react-icons.github.io/react-icons/
+[trello]: https://trello.com/b/prSeXglQ
