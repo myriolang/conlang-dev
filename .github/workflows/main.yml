@@ -44,7 +44,7 @@ jobs:
           path: out
       - name: "deploy"
         run: |
-          npx @getmeli/cli upload \
+          npx -p "@getmeli/cli" meli upload \
             --url https://meli.conlang.dev \
             --site "$MELI_SITE" \
             --token "$MELI-TOKEN" \
