@@ -1,10 +1,8 @@
 <div align="center">
 <br><div><img height="118" src="public/conlang-dev-logo.svg" alt="conlang.dev"/></div>
-<br>
 
 [![Build status][shields-ci]][github-ci]
 
-<br><br>
 **conlang.dev** is a tool for conlangers and linguists to document their languages.
 </div>
 
