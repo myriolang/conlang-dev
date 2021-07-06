@@ -33,7 +33,7 @@ export const Profile = {
         } as IAuthenticationResponse)
       })
       .catch((err) => {
-        if (err.response.status == 401) {
+        if (err.response && err.response.status == 401) {
           callback(undefined, undefined)
         } else {
           callback(err)
