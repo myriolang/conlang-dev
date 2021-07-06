@@ -44,11 +44,11 @@ jobs:
           path: out
       - name: "deploy"
         run: |
-          npx -p "@getmeli/cli" meli upload ./out \
-            --url "https://meli.conlang.dev" \
+          npx @getmeli/cli upload \
+            --url https://meli.conlang.dev \
             --site "$MELI_SITE" \
-            --token "$MELI_TOKEN" \
-            --release "$GITHUB_SHA"
+            --token "$MELI-TOKEN" \
+            ./out
         env:
           MELI_TOKEN: ${{ secrets.MELI_TOKEN }}
           # Enable PR previews:
