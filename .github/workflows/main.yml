@@ -1,0 +1,57 @@
+name: main
+on: [ push ]
+env:
+  MELI_SITE: "b1809c4c-2c2e-45ec-bc90-106b829f5af0"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: "lint"
+        run: |
+          yarn install
+          yarn lint
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: "build"
+        run: |
+          yarn install
+          yarn build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: next-build
+          path: out
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - uses: actions/download-artifact@v2
+        with:
+          name: next-build
+          path: out
+      - name: "deploy"
+        run: |
+          npx -p "@getmeli/cli" meli upload ./out \
+            --url "https://meli.conlang.dev" \
+            --site "$MELI_SITE" \
+            --token "$MELI_TOKEN" \
+            --release "$GITHUB_SHA"
+        env:
+          MELI_TOKEN: ${{ secrets.MELI_TOKEN }}
+          # Enable PR previews:
+          # uses the default GITHUB_TOKEN set by Github Actions
+          # https://docs.github.com/en/actions/reference/authentication-in-a-workflow#about-the-github_token-secret
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
