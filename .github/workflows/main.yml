@@ -44,4 +44,4 @@ jobs:
           known_hosts: ${{ secrets.SSH_KNOWN_HOSTS }}
           config: ${{ secrets.SSH_CONFIG }}
       - name: "deploy"
-        run: rsync ./out conlangdev@host:/opt/conlangdev
+        run: rsync -azP --delete ./out/ conlangdev@host:/opt/conlangdev
