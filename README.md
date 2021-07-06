@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div align="center">
+<br><div><img height="118" src="public/conlang-dev-logo.svg" alt="conlang.dev"/></div>
+<br><br><br>
+[![Build status][shields-ci]][github-ci]
+</div>
 
-## Getting Started
+**conlang.dev** is a tool for conlangers and linguists to document their languages.
 
-First, run the development server:
+## 🐻 Project Overview
+This project uses
+* [Next.js][next] as a [React][react] framework
+  * [Redux][redux] (via [Redux Toolkit][toolkit]) for state management (persisted with [redux-persist][persist])
+* [Typescript][ts] for typesafe JS code
+  * [ESLint][eslint] for code checking
+  * [Prettier][prettier] as an opinionated code formatter
+* [Chakra UI][chakra] for reactive and accessible UI
+  * [React Icons][icons] for icons
+* [axios][axios] for API communication with the back-end
 
-```bash
-npm run dev
-# or
-yarn dev
+## 🛣️ Roadmap
+Find the full roadmap on [Trello][https://trello.com/b/prSeXglQ]
+
+## 🏄 Setup
+To get the project set up locally, just clone, install and Bob's yer (figurative) uncle.
+```sh
+git clone https://github.com/myriolang/conlang-dev.git
+cd conlang-dev
+yarn
 ```
+You can run the development server with `yarn dev`. All code should pass linting (`yarn lint`)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[shields-ci]: https://img.shields.io/github/workflow/status/myriolang/conlang-dev/main
+[github-ci]: https://github.com/myriolang/conlang-dev/actions/workflows/main.yml
+[next]: https://nextjs.org/
+[react]: https://reactjs.org/
+[redux]: https://redux.js.org/
+[toolkit]: https://redux-toolkit.js.org/
+[chakra]: https://chakra-ui.com/
+[persist]: https://github.com/rt2zz/redux-persist
+[axios]: https://axios-http.com/
+[ts]: https://www.typescriptlang.org/
+[eslint]: https://eslint.org/
+[prettier]: https://prettier.io/
+[icons]: https://react-icons.github.io/react-icons/
