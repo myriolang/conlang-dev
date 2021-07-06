@@ -40,6 +40,15 @@ export const Profile = {
         }
       })
   },
+  validate: (jwt: string): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
+      api
+        .get("/api/auth", {
+          headers: { Authorization: `Bearer ${jwt}` }
+        })
+        .then(() => resolve())
+        .catch(() => reject())
+    }),
   // Fetch a single profile
   // GET /api/profile
   get: (

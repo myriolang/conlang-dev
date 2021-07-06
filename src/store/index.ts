@@ -32,6 +32,7 @@ const createNoopStorage = () => {
   }
 }
 
+// persist config for all reducers
 const persistConfig = {
   key: "root",
   storage:
@@ -40,9 +41,16 @@ const persistConfig = {
       : createNoopStorage()
 }
 
+// extra config for auth
+const authPersistConfig = {
+  ...persistConfig,
+  key: "auth",
+  blacklist: ["authTime"]
+}
+
 export const store = configureStore({
   reducer: {
-    auth: persistReducer(persistConfig, authReducer),
+    auth: persistReducer(authPersistConfig, authReducer),
     ui: uiReducer
   },
   middleware: getDefaultMiddleware({

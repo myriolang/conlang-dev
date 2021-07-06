@@ -1,21 +1,53 @@
-import { Button } from "@chakra-ui/react"
+import { Button, Spinner } from "@chakra-ui/react"
 import { useAppSelector } from "../../../store"
-import { openAccountModal } from "../../../store/slices/ui"
+import {
+  openAccountModal,
+  startCheckingAuth,
+  stopCheckingAuth
+} from "../../../store/slices/ui"
 import { FiLogIn, FiUser } from "react-icons/fi"
 import AccountModal from "./AccountModal"
 import { useDispatch } from "react-redux"
+import { useEffect } from "react"
+import { Profile } from "../../../data/Profile"
+import { logout } from "../../../store/slices/auth"
 
 const AccountButton: React.FC = () => {
-  const { authenticated, profile } = useAppSelector(
+  const { authenticated, profile, jwt, authTime } = useAppSelector(
     (state) => state.auth
   )
+  const { checkingAuth } = useAppSelector((state) => state.ui)
   const dispatch = useDispatch()
+
+  // check that auth is still valid upon hydration
+  // or every five minutes
+  const checkAuth = () => {
+    if (!authenticated) {
+      dispatch(stopCheckingAuth())
+    } else if (
+      !authTime ||
+      new Date().getTime() - new Date(authTime).getTime() >=
+        2 * 60 * 1000
+    ) {
+      dispatch(startCheckingAuth())
+      Profile.validate(jwt)
+        .catch(() => dispatch(logout()))
+        .finally(() => dispatch(stopCheckingAuth()))
+    }
+  }
+  useEffect(checkAuth, [jwt])
 
   return (
     <>
       {authenticated ? (
         <Button
-          leftIcon={<FiUser />}
+          leftIcon={
+            checkingAuth ? (
+              <Spinner size="sm" color="primary.400" />
+            ) : (
+              <FiUser />
+            )
+          }
           onClick={() => dispatch(openAccountModal())}
         >
           {profile.username}

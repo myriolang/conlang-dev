@@ -5,6 +5,7 @@ export type AuthState = {
   authenticated: boolean
   jwt?: string
   profile?: IProfile
+  authTime?: string
 }
 
 export type LoginPayload = {
@@ -21,7 +22,8 @@ const authSlice = createSlice({
     login: (state, action: PayloadAction<LoginPayload>) => ({
       authenticated: true,
       jwt: action.payload.jwt,
-      profile: action.payload.profile
+      profile: action.payload.profile,
+      authTime: new Date().toJSON()
     }),
     logout: () => ({ authenticated: false })
   }
