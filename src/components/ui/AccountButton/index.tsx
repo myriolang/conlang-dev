@@ -1,4 +1,4 @@
-import { Button, Spinner } from "@chakra-ui/react"
+import { Button, Spinner, useToast } from "@chakra-ui/react"
 import { useAppSelector } from "../../../store"
 import {
   openAccountModal,
@@ -13,6 +13,7 @@ import { Profile } from "../../../data/Profile"
 import { logout } from "../../../store/slices/auth"
 
 const AccountButton: React.FC = () => {
+  const toast = useToast()
   const { authenticated, profile, jwt, authTime } = useAppSelector(
     (state) => state.auth
   )
@@ -31,7 +32,16 @@ const AccountButton: React.FC = () => {
     ) {
       dispatch(startCheckingAuth())
       Profile.validate(jwt)
-        .catch(() => dispatch(logout()))
+        .catch(() => {
+          dispatch(logout())
+          toast({
+            title: "Login expired",
+            description: "You have been logged out",
+            status: "warning",
+            isClosable: true
+          })
+          dispatch(openAccountModal())
+        })
         .finally(() => dispatch(stopCheckingAuth()))
     }
   }
