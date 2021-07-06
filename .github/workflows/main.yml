@@ -20,6 +20,10 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
+      - name: "pull environment"
+        run: 'echo "$ENV_PRODUCTION" > .env.production'
+        env:
+          ENV_PRODUCTION: ${{ secrets.ENV_PRODUCTION }}
       - name: "build"
         run: |
           yarn install
