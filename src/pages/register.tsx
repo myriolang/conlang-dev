@@ -23,13 +23,11 @@ import { openAccountModal } from "../store/slices/ui"
 import { useDispatch } from "react-redux"
 import withAuthentication from "../utils/authentication"
 import inputSubmit from "../utils/inputSubmit"
-import { useAppSelector } from "../store"
 import { useRouter } from "next/router"
 
 const RegisterPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>()
   const [submitted, setSubmitted] = useState<boolean>()
-  const [error, setError] = useState<string>()
   const [username, setUsername] = useState<string>()
   const [email, setEmail] = useState<string>()
   const [password, setPassword] = useState<string>()
