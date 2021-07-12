@@ -6,7 +6,8 @@ import {
   Input,
   InputRightElement,
   Icon,
-  Spinner
+  Spinner,
+  useColorModeValue
 } from "@chakra-ui/react"
 import { FiX, FiCheck } from "react-icons/fi"
 import { KeyboardEvent, useEffect, useState } from "react"
@@ -27,6 +28,13 @@ const UsernameField: React.FC<Props> = ({
   const [loading, setLoading] = useState<boolean>(false)
   const [checked, setChecked] = useState<boolean>(false)
   const [valid, setValid] = useState<boolean>(true)
+
+  const defaultBorder = useColorModeValue(
+    "gray.200",
+    "whiteAlpha.300"
+  )
+  const invalidBorder = useColorModeValue("red.300", "red.400")
+  const invalidTextColor = useColorModeValue("red.500", "red.300")
 
   useEffect(() => {
     const source = axios.CancelToken.source()
@@ -72,19 +80,18 @@ const UsernameField: React.FC<Props> = ({
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyPress={onKeyPress}
-          background={checked && !valid ? "red.100" : "none"}
           borderColor={
             checked && valid
               ? "primary.200"
               : checked
-              ? "red.200"
-              : "gray.200"
+              ? invalidBorder
+              : defaultBorder
           }
         />
         <InputRightElement>{rightElem}</InputRightElement>
       </InputGroup>
       {checked && !valid ? (
-        <FormHelperText color="red">
+        <FormHelperText color={invalidTextColor}>
           That username is taken.
         </FormHelperText>
       ) : (

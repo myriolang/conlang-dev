@@ -6,7 +6,9 @@ import {
   ModalBody,
   ModalCloseButton,
   Heading,
-  Button
+  Button,
+  Text,
+  useColorModeValue
 } from "@chakra-ui/react"
 import { FiPlus } from "react-icons/fi"
 import { useState, useEffect } from "react"
@@ -25,6 +27,9 @@ const LanguageModal: React.FC = () => {
   //const [error, setError] = useState<boolean>(false)
   const [languages, setLanguages] = useState<ILanguage[]>([])
   const [selected, setSelected] = useState<string>("")
+
+  const bannerBg = useColorModeValue("gray.200", "gray.600")
+  const headingColor = useColorModeValue("gray.700", "gray.300")
 
   useEffect(() => {
     if (!jwt) return
@@ -58,7 +63,7 @@ const LanguageModal: React.FC = () => {
           backgroundSize="auto 96px"
           backgroundRepeat="no-repeat"
           backgroundPosition="8% 100%"
-          backgroundColor="gray.200"
+          backgroundColor={bannerBg}
           borderTopRadius="md"
           position="relative"
         >
@@ -74,9 +79,14 @@ const LanguageModal: React.FC = () => {
           </Button>
         </ModalHeader>
         <ModalBody>
-          <Heading size="md" color="gray.700" mt={4} mb={2}>
+          <Heading size="md" color={headingColor} mt={4} mb={2}>
             My languages
           </Heading>
+          {(!languages || languages.length == 0) && (
+            <Text mt={3} fontSize="sm" color={headingColor}>
+              You have no languages
+            </Text>
+          )}
         </ModalBody>
         {languages.map((language) => (
           <LanguageOption

@@ -1,4 +1,10 @@
-import { Flex, Box, Text, Button } from "@chakra-ui/react"
+import {
+  Flex,
+  Box,
+  Text,
+  Button,
+  useColorModeValue
+} from "@chakra-ui/react"
 import {
   FiMoreVertical,
   FiEye,
@@ -20,6 +26,10 @@ const LanguageOption: React.FC<Props> = ({
   setSelected
 }: Props) => {
   const { profile } = useAppSelector((state) => state.auth)
+
+  const selectedBg = useColorModeValue("gray.100", "gray.600")
+  const activeBg = useColorModeValue("gray.200", "gray.500")
+
   return (
     <>
       <Flex
@@ -30,10 +40,10 @@ const LanguageOption: React.FC<Props> = ({
         py={2}
         cursor="pointer"
         _hover={{
-          background: "gray.100"
+          background: selectedBg
         }}
         _active={{
-          background: "gray.200"
+          background: activeBg
         }}
         _focus={{
           boxShadow: "outline"

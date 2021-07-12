@@ -12,7 +12,8 @@ import {
   Button,
   Link,
   Spinner,
-  useToast
+  useToast,
+  useColorModeValue
 } from "@chakra-ui/react"
 import { FiHeart } from "react-icons/fi"
 import { closeAccountModal } from "../../../store/slices/ui"
@@ -37,6 +38,13 @@ const AccountModalLogin: React.FC<Props> = ({
 
   const dispatch = useDispatch()
   const toast = useToast()
+
+  const footerBg = useColorModeValue("gray.100", "gray.600")
+  const footerColor = useColorModeValue("gray.700", "gray.300")
+  const footerLinkColor = useColorModeValue(
+    "primary.600",
+    "primary.400"
+  )
 
   const handleLogin = () => {
     if (loading) return
@@ -142,17 +150,17 @@ const AccountModalLogin: React.FC<Props> = ({
         </Flex>
       </ModalBody>
       <ModalFooter
-        background="gray.100"
+        background={footerBg}
         justifyContent="center"
         borderBottomRadius="md"
         mt={2}
         py={6}
       >
-        <Text fontSize="sm" color="gray.700">
+        <Text fontSize="sm" color={footerColor}>
           Not registered yet?{" "}
           <NextLink href="/register" passHref>
             <Link
-              color="primary.600"
+              color={footerLinkColor}
               onClick={() => dispatch(closeAccountModal())}
             >
               Create an account

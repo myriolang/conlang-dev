@@ -8,7 +8,8 @@ import {
   Link,
   Icon,
   Image,
-  Button
+  Button,
+  useColorModeValue
 } from "@chakra-ui/react"
 import NextLink from "next/link"
 import { FiArrowUpRight, FiExternalLink } from "react-icons/fi"
@@ -21,6 +22,11 @@ const Index: React.FC = () => {
     (state) => state.auth
   )
   const dispatch = useDispatch()
+
+  const sectionTitle = useColorModeValue("gray.700", "gray.200")
+  const altSectionBg = useColorModeValue("gray.100", "gray.700")
+  const altSectionTitle = useColorModeValue("gray.600", "gray.300")
+  const linkColor = useColorModeValue("primary.700", "primary.500")
 
   return (
     <PageWrapper
@@ -71,6 +77,7 @@ const Index: React.FC = () => {
                     mx={[0, 0, 2]}
                     my={[2, 2, 0]}
                     colorScheme="mauve"
+                    color="white"
                     size="lg"
                     leftIcon={<FiArrowUpRight />}
                     onClick={() => dispatch(openAccountModal())}
@@ -108,7 +115,7 @@ const Index: React.FC = () => {
           >
             <Flex align="center" justify="space-between">
               <Box flexGrow={1}>
-                <Heading color="gray.700">About</Heading>
+                <Heading color={sectionTitle}>About</Heading>
                 <Text fontSize="lg" mt={3}>
                   <b>conlang.dev</b> is a platform where linguists and
                   conlangers can document their languages intuitively
@@ -117,7 +124,7 @@ const Index: React.FC = () => {
                   of lexicon organization, made by{" "}
                   <Link
                     href="https://myriolang.org"
-                    color="primary.700"
+                    color={linkColor}
                     isExternal
                   >
                     Myriolang
@@ -141,9 +148,9 @@ const Index: React.FC = () => {
               />
             </Flex>
           </Box>
-          <Box bg="gray.100">
+          <Box bg={altSectionBg}>
             <Box maxW={960} mx="auto" px={[4, 4, 2]} py={[8, 8, 12]}>
-              <Heading size="lg" color="gray.600">
+              <Heading size="lg" color={altSectionTitle}>
                 What&apos;s to come?
               </Heading>
               <Text mt={3}>
@@ -152,7 +159,7 @@ const Index: React.FC = () => {
                 you can keep up to date via the{" "}
                 <Link
                   href="https://github.com/myriolang/conlang-dev"
-                  color="primary.700"
+                  color={linkColor}
                   isExternal
                 >
                   Github repository
@@ -169,7 +176,7 @@ const Index: React.FC = () => {
                 We also have a{" "}
                 <Link
                   href="https://trello.com/b/prSeXglQ"
-                  color="primary.700"
+                  color={linkColor}
                   isExternal
                 >
                   Trello

@@ -8,9 +8,12 @@ import {
   Box,
   Stack,
   Link,
-  useColorModeValue
+  useColorMode,
+  useColorModeValue,
+  IconButton,
+  Icon
 } from "@chakra-ui/react"
-import { FiMenu, FiX } from "react-icons/fi"
+import { FiMenu, FiMoon, FiSun, FiX } from "react-icons/fi"
 
 import { useAppSelector } from "../../../store"
 
@@ -20,6 +23,8 @@ const NavBar: React.FC = ({ ...props }) => {
   const [open, setOpen] = useState<boolean>(false)
   const handleToggle = () => setOpen(!open)
 
+  const { toggleColorMode } = useColorMode()
+  const colorModeIcon = useColorModeValue(FiMoon, FiSun)
   const borderColor = useColorModeValue("gray.100", "gray.700")
 
   return (
@@ -70,6 +75,11 @@ const NavBar: React.FC = ({ ...props }) => {
           pt={[4, 4, 0, 0]}
         >
           {authenticated && <AuthenticatedNavLinks />}
+          <IconButton
+            aria-label="Toggle colour mode"
+            onClick={toggleColorMode}
+            icon={<Icon as={colorModeIcon} />}
+          />
           <AccountButton />
         </Stack>
       </Box>
