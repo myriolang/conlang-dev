@@ -1,5 +1,6 @@
 import { AppProps } from "next/app"
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider, Flex, Box } from "@chakra-ui/react"
+import PageFooter from "../components/ui/PageFooter"
 
 import { store, persistor } from "../store"
 import { Provider } from "react-redux"
@@ -16,8 +17,13 @@ const App: React.FC<AppProps> = ({
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <ChakraProvider theme={theme}>
-          <NavBar />
-          <Component {...pageProps} />
+          <Flex direction="column" w="100%" minH="100vh">
+            <NavBar />
+            <Box flexGrow={1}>
+              <Component {...pageProps} />
+            </Box>
+            <PageFooter />
+          </Flex>
         </ChakraProvider>
       </PersistGate>
     </Provider>
