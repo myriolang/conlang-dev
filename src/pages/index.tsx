@@ -30,7 +30,9 @@ const Index: React.FC = () => {
       {authenticated ? (
         <>
           <PageHeading title={`Hey, ${profile.username}`} />
-          <Text>Etc...</Text>
+          <Text>
+            Welcome to your dashboard! This will improve over time...
+          </Text>
         </>
       ) : (
         <>
