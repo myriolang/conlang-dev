@@ -21,6 +21,7 @@ const PageWrapper: React.FC<Props> = ({
       as="main"
       maxWidth={type === "fullwidth" ? "auto" : 960}
       mx={type === "fullwidth" ? 0 : "auto"}
+      mt={type === "fullwidth" ? 0 : 8}
       px={type === "fullwidth" ? 0 : [4, 4, 2]}
       pb={4}
     >

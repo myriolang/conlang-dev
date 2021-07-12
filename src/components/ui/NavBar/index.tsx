@@ -29,7 +29,6 @@ const NavBar: React.FC = ({ ...props }) => {
       justify="space-between"
       wrap="wrap"
       w="100%"
-      mb={8}
       py={5}
       px={[6, 6, 12, 24]}
       borderBottom="1px solid"
