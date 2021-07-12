@@ -26,7 +26,7 @@ const AccountProfileButton: React.FC = () => {
   const toast = useToast()
 
   return (
-    <Menu>
+    <Menu placement="bottom-end">
       <MenuButton
         as={Button}
         leftIcon={
