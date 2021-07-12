@@ -9,16 +9,21 @@ import {
   Spinner
 } from "@chakra-ui/react"
 import { FiX } from "react-icons/fi"
-import { useEffect, useState } from "react"
+import { KeyboardEvent, useEffect, useState } from "react"
 import api from "../../utils/axios"
 import axios from "axios"
 
 type Props = {
   value: string
   setValue: (value: string) => void
+  onKeyPress: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
-const EmailField: React.FC<Props> = ({ value, setValue }: Props) => {
+const EmailField: React.FC<Props> = ({
+  value,
+  setValue,
+  onKeyPress
+}: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [checked, setChecked] = useState<boolean>(false)
   const [valid, setValid] = useState<boolean>(true)
@@ -63,6 +68,7 @@ const EmailField: React.FC<Props> = ({ value, setValue }: Props) => {
           type="email"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          onKeyPress={onKeyPress}
           background={checked && !valid ? "red.100" : "none"}
           borderColor={checked && !valid ? "red.200" : "gray.200"}
         />

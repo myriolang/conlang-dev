@@ -40,6 +40,8 @@ export const Profile = {
         }
       })
   },
+  // Validate a log-in token
+  // GET /api/auth
   validate: (jwt: string): Promise<void> =>
     new Promise<void>((resolve, reject) => {
       api
@@ -56,5 +58,22 @@ export const Profile = {
     callback: (error?: string, profile?: IProfile) => void
   ): void => {
     callback("Not implemented")
-  }
+  },
+  // Create a new profile
+  // POST /api/profile
+  create: (
+    email: string,
+    username: string,
+    password: string
+  ): Promise<void> =>
+    new Promise<void>((resolve, reject) => {
+      api
+        .post("/api/profile", {
+          username,
+          password,
+          email
+        })
+        .then(() => resolve())
+        .catch(() => reject())
+    })
 }

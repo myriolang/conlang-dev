@@ -9,18 +9,20 @@ import {
   Spinner
 } from "@chakra-ui/react"
 import { FiX, FiCheck } from "react-icons/fi"
-import { useEffect, useState } from "react"
+import { KeyboardEvent, useEffect, useState } from "react"
 import api from "../../utils/axios"
 import axios from "axios"
 
 type Props = {
   value: string
   setValue: (value: string) => void
+  onKeyPress: (e: KeyboardEvent<HTMLInputElement>) => void
 }
 
 const UsernameField: React.FC<Props> = ({
   value,
-  setValue
+  setValue,
+  onKeyPress
 }: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [checked, setChecked] = useState<boolean>(false)
@@ -69,6 +71,7 @@ const UsernameField: React.FC<Props> = ({
           placeholder="example"
           value={value}
           onChange={(e) => setValue(e.target.value)}
+          onKeyPress={onKeyPress}
           background={checked && !valid ? "red.100" : "none"}
           borderColor={
             checked && valid

@@ -4,6 +4,7 @@ import UsernameField from "../components/registration/UsernameField"
 import EmailField from "../components/registration/EmailField"
 
 import { useState } from "react"
+import { Profile } from "../data/Profile"
 import {
   Box,
   Flex,
@@ -12,59 +13,85 @@ import {
   FormHelperText,
   Input,
   Button,
-  Heading,
   Text,
-  Icon,
-  Link
+  Link,
+  Spinner,
+  useToast
 } from "@chakra-ui/react"
-import { FiUserCheck, FiMessageSquare } from "react-icons/fi"
+import { FiUserCheck } from "react-icons/fi"
 import { openAccountModal } from "../store/slices/ui"
 import { useDispatch } from "react-redux"
 import withAuthentication from "../utils/authentication"
+import inputSubmit from "../utils/inputSubmit"
+import { useAppSelector } from "../store"
+import { useRouter } from "next/router"
 
 const RegisterPage: React.FC = () => {
+  const [loading, setLoading] = useState<boolean>()
+  const [submitted, setSubmitted] = useState<boolean>()
+  const [error, setError] = useState<string>()
   const [username, setUsername] = useState<string>()
   const [email, setEmail] = useState<string>()
   const [password, setPassword] = useState<string>()
 
   const dispatch = useDispatch()
+  const toast = useToast()
+  const router = useRouter()
+
+  const handleRegister = () => {
+    if (
+      submitted ||
+      !username ||
+      !(username.length > 2) ||
+      !password ||
+      !(password.length > 2) ||
+      !email ||
+      !(email.length > 2)
+    )
+      return
+
+    setSubmitted(true)
+    setLoading(true)
+    Profile.create(email, username, password)
+      .then(() => {
+        toast({
+          title: "Account created",
+          description: "Try logging in to start using conlang.dev",
+          status: "success",
+          isClosable: true
+        })
+        router.push("/")
+        dispatch(openAccountModal())
+      })
+      .catch(() => {
+        toast({
+          title: "Something went wrong",
+          description: "Account could not be created",
+          status: "error",
+          isClosable: true
+        })
+        setSubmitted(false)
+      })
+      .finally(() => setLoading(false))
+  }
 
   return (
     <PageWrapper title="Register" type="regular">
-      <Flex
-        w="100%"
-        align="center"
-        bg="gray.100"
-        px={5}
-        py={3}
-        borderLeft="3px solid"
-        borderColor="primary.400"
-        borderRadius="md"
-        mb={2}
-      >
-        <Icon
-          as={FiMessageSquare}
-          mr={4}
-          boxSize="1.5em"
-          color="primary.600"
-        />
-        <Box>
-          <Heading size="xs" color="primary.600">
-            Sorry!
-          </Heading>
-          <Text fontSize="sm" color="primary.700">
-            Registrations are not quite ready yet. Keep your eyes
-            peeled!
-          </Text>
-        </Box>
-      </Flex>
       <PageHeading title="Register" />
       <Flex direction="row" wrap="wrap">
         <Box w="100%" pb={6}>
-          <EmailField value={email} setValue={setEmail} />
+          <EmailField
+            value={email}
+            setValue={setEmail}
+            onKeyPress={inputSubmit(handleRegister)}
+          />
         </Box>
         <Box w={["100%", "100%", "50%"]} pr={[0, 0, 2]} pb={6}>
-          <UsernameField value={username} setValue={setUsername} />
+          <UsernameField
+            value={username}
+            setValue={setUsername}
+            onKeyPress={inputSubmit(handleRegister)}
+          />
         </Box>
         <FormControl
           w={["100%", "100%", "50%"]}
@@ -76,6 +103,7 @@ const RegisterPage: React.FC = () => {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            onKeyPress={inputSubmit(handleRegister)}
           />
           <FormHelperText>
             Try not to reuse the same password as other sites, and be
@@ -85,8 +113,15 @@ const RegisterPage: React.FC = () => {
         <Box w="100%">
           <Button
             colorScheme="primary"
-            leftIcon={<FiUserCheck />}
-            disabled
+            leftIcon={
+              loading ? (
+                <Spinner size="sm" color="white" />
+              ) : (
+                <FiUserCheck />
+              )
+            }
+            disabled={submitted}
+            onClick={handleRegister}
           >
             Register
           </Button>
