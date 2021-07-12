@@ -39,6 +39,7 @@ const AccountModalLogin: React.FC<Props> = ({
   const toast = useToast()
 
   const handleLogin = () => {
+    if (loading) return
     if (
       username &&
       username.length > 2 &&
@@ -134,6 +135,7 @@ const AccountModalLogin: React.FC<Props> = ({
             mt={4}
             w="100%"
             onClick={handleLogin}
+            disabled={loading}
           >
             {loading ? <Spinner size="sm" color="white" /> : "Log in"}
           </Button>
