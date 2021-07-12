@@ -1,5 +1,4 @@
 import AccountModalLogin from "./AccountModalLogin"
-import AccountModalAccount from "./AccountModalAccount"
 
 import {
   Modal,
@@ -29,9 +28,7 @@ const AccountModal: React.FC = () => {
       <ModalContent>
         <ModalHeader />
         <ModalCloseButton />
-        {authenticated ? (
-          <AccountModalAccount initialFocusRef={initialFocusRef} />
-        ) : (
+        {!authenticated && (
           <AccountModalLogin initialFocusRef={initialFocusRef} />
         )}
       </ModalContent>

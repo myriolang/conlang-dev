@@ -86,6 +86,9 @@ const theme = extendTheme({
       "::selection": {
         background: "primary.400",
         color: "white"
+      },
+      body: {
+        minHeight: "100vh"
       }
     }
   }
