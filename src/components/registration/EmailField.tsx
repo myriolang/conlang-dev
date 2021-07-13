@@ -42,8 +42,8 @@ const EmailField: React.FC<Props> = ({
       if (value && value.length > 2) {
         setLoading(true)
         api
-          .post("/api/profile/validate/username", {
-            username: value
+          .post("/api/profile/validate/email", {
+            email: value
           })
           .then((data) => {
             console.log(data)
