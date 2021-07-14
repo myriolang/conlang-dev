@@ -1,10 +1,11 @@
 import { AppProps } from "next/app"
+import { DefaultSeo } from "next-seo"
 import { ChakraProvider, Flex, Box } from "@chakra-ui/react"
 import PageFooter from "../components/ui/PageFooter"
 
 import { store, persistor } from "../store"
 import { Provider } from "react-redux"
-import { PersistGate } from "redux-persist/lib/integration/react"
+import NextPersistGate from "../utils/NextPersistGate"
 
 import theme from "../utils/theme"
 import NavBar from "../components/ui/NavBar"
@@ -15,7 +16,25 @@ const App: React.FC<AppProps> = ({
 }: AppProps) => {
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <NextPersistGate persistor={persistor}>
+        <DefaultSeo
+          title="conlang.dev"
+          description="Language documentation tool for linguists and conlangers."
+          openGraph={{
+            type: "website",
+            locale: "en_GB",
+            url: "https://conlang.dev",
+            site_name: "conlang.dev",
+            description:
+              "Language documentation tool for linguists and conlangers",
+            images: [
+              {
+                url: "https://conlang.dev/conlang-dev-logo.png",
+                alt: "conlang.dev logo"
+              }
+            ]
+          }}
+        />
         <ChakraProvider theme={theme}>
           <Flex direction="column" w="100%" minH="100vh">
             <NavBar />
@@ -25,7 +44,7 @@ const App: React.FC<AppProps> = ({
             <PageFooter />
           </Flex>
         </ChakraProvider>
-      </PersistGate>
+      </NextPersistGate>
     </Provider>
   )
 }

@@ -9,7 +9,11 @@ const Contact: React.FC = () => {
   const subtleColor = useColorModeValue("gray.600", "gray.400")
 
   return (
-    <PageWrapper title="Contact" type="narrow">
+    <PageWrapper
+      title="Contact"
+      type="narrow"
+      description="Whether it's a concern about privacy, or just a simple question about the site - we are only ever a single email away."
+    >
       <PageHeading title="Contact Us" />
       <Text fontSize="lg">
         Whether it&apos;s a concern about privacy, or just a simple

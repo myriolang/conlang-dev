@@ -15,7 +15,11 @@ const PrivacyPolicy: React.FC = () => {
   const linkColor = useColorModeValue("primary.700", "primary.300")
 
   return (
-    <PageWrapper title="Privacy Policy" type="narrow">
+    <PageWrapper
+      title="Privacy Policy"
+      type="narrow"
+      description="Your privacy matters a lot to us which is why we've done our best to simplify our privacy policy and make it as clear as possible."
+    >
       <PageHeading title="Privacy Policy" />
       <Heading size="lg" color={headingColor}>
         Summary

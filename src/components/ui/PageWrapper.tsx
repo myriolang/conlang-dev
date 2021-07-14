@@ -4,8 +4,8 @@ import { Box } from "@chakra-ui/react"
 type Props = {
   title: string
   description?: string
+  ogHideTitle?: boolean
   type: "regular" | "fullwidth" | "narrow"
-  noSeo?: boolean
   children: React.ReactNode
 }
 
@@ -13,7 +13,7 @@ const PageWrapper: React.FC<Props> = ({
   title,
   description,
   type,
-  noSeo,
+  ogHideTitle,
   children
 }: Props) => {
   return (
@@ -27,17 +27,14 @@ const PageWrapper: React.FC<Props> = ({
       px={type === "fullwidth" ? 0 : [4, 4, 2]}
       pb={12}
     >
-      {!noSeo && (
-        <NextSeo
-          title={`${title} – conlang.dev`}
-          description={description}
-          openGraph={{
-            title,
-            description,
-            site_name: "conlang.dev"
-          }}
-        />
-      )}
+      <NextSeo
+        title={`${title} – conlang.dev`}
+        description={description}
+        openGraph={{
+          description,
+          ...(!ogHideTitle && { title })
+        }}
+      />
       {children}
     </Box>
   )
