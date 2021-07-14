@@ -36,7 +36,7 @@ const PageFooter: React.FC = () => {
           <Link mx={2}>Privacy Policy</Link>
         </NextLink>
         ·
-        <NextLink href="mailto:hello@myriolang.org" passHref>
+        <NextLink href="/contact" passHref>
           <Link mx={2}>Contact</Link>
         </NextLink>
       </Text>
