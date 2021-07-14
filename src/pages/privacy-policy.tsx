@@ -2,7 +2,6 @@ import PageHeading from "../components/ui/PageHeading"
 import PageWrapper from "../components/ui/PageWrapper"
 import NextLink from "next/link"
 import {
-  Box,
   Heading,
   Text,
   Link,

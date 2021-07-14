@@ -1,16 +1,10 @@
 import PageHeading from "../components/ui/PageHeading"
 import PageWrapper from "../components/ui/PageWrapper"
 import NextLink from "next/link"
-import {
-  Heading,
-  Text,
-  Button,
-  useColorModeValue
-} from "@chakra-ui/react"
+import { Text, Button, useColorModeValue } from "@chakra-ui/react"
 import { FiMail } from "react-icons/fi"
 
 const Contact: React.FC = () => {
-  const headingColor = useColorModeValue("gray.600", "gray.400")
   const emailColor = useColorModeValue("primary.600", "primary.400")
   const subtleColor = useColorModeValue("gray.600", "gray.400")
 
