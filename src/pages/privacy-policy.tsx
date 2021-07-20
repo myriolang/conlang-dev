@@ -113,8 +113,8 @@ const PrivacyPolicy: React.FC = () => {
       </Heading>
       <Text mt={4}>
         Protection of children online is a large priority for us and
-        we encourage any parents to observe, participate in, and/or
-        monitor and guide their childrens&apos; online activity.
+        we encourage any parents to be aware of and guide their
+        childrens&apos; online activity.
       </Text>
       <Text mt={4}>
         conlang.dev does not knowingly collect any Personal
