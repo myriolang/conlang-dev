@@ -18,12 +18,12 @@ import { useAppSelector } from "../../../store"
 import { logout } from "../../../store/slices/auth"
 
 const AccountProfileButton: React.FC = () => {
+  const dispatch = useDispatch()
+  const toast = useToast()
+
   const { profile } = useAppSelector((state) => state.auth)
   const { checkingAuth } = useAppSelector((state) => state.ui)
   if (!profile) return
-
-  const dispatch = useDispatch()
-  const toast = useToast()
 
   return (
     <Menu placement="bottom-end">
