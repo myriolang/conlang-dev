@@ -96,8 +96,8 @@ const UsernameField: React.FC<Props> = ({
         </FormHelperText>
       ) : (
         <FormHelperText>
-          This will appear in your profile&apos;s URL -{" "}
-          {value && value.length > 2 ? value : "example"}.conlang.dev
+          This will appear in your profile&apos;s URL - conlang.dev/
+          {value && value.length > 2 ? value : "example"}
         </FormHelperText>
       )}
     </FormControl>
