@@ -49,8 +49,9 @@ function withAuthentication(
             </PageWrapper>
           )
         }
+        return <ChildComponent {...this.props} />
       }
-      return <ChildComponent {...this.props} />
+      return null
     }
   }
   return withRouter(connector(AuthenticatedComponent))

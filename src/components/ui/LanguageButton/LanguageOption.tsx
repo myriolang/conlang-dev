@@ -6,8 +6,8 @@ import {
   useColorModeValue
 } from "@chakra-ui/react"
 import {
+  FiX,
   FiChevronDown,
-  FiChevronUp,
   FiEye,
   FiBook,
   FiSettings
@@ -60,11 +60,7 @@ const LanguageOption: React.FC<Props> = ({
           </Text>
         </Box>
         <Box flexShrink={1}>
-          {selected === language.id ? (
-            <FiChevronUp />
-          ) : (
-            <FiChevronDown />
-          )}
+          {selected === language.id ? <FiX /> : <FiChevronDown />}
         </Box>
       </Flex>
       <Box

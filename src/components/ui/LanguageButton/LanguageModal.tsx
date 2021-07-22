@@ -14,25 +14,42 @@ import { FiPlus } from "react-icons/fi"
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import { useAppSelector } from "../../../store"
-import { closeLanguageModal } from "../../../store/slices/ui"
+import {
+  closeLanguageModal,
+  startCheckingLanguages,
+  stopCheckingLanguages
+} from "../../../store/slices/ui"
 import { logout } from "../../../store/slices/auth"
 import { Language, ILanguage } from "../../../data/Language"
 import LanguageOption from "./LanguageOption"
+import { useRouter } from "next/router"
 
 const LanguageModal: React.FC = () => {
-  const { languageModalOpen } = useAppSelector((state) => state.ui)
+  const { languageModalOpen, checkingLanguages } = useAppSelector(
+    (state) => state.ui
+  )
   const { jwt } = useAppSelector((state) => state.auth)
   const dispatch = useDispatch()
-  //const [loading, setLoading] = useState<boolean>(true)
-  //const [error, setError] = useState<boolean>(false)
+  const router = useRouter()
+
   const [languages, setLanguages] = useState<ILanguage[]>([])
   const [selected, setSelected] = useState<string>("")
 
   const bannerBg = useColorModeValue("gray.200", "gray.600")
   const headingColor = useColorModeValue("gray.700", "gray.300")
 
+  const handleNewLanguage = () => {
+    dispatch(closeLanguageModal())
+    router.push("/language/new")
+  }
+
+  useEffect(() => {
+    dispatch(startCheckingLanguages())
+  }, [])
+
   useEffect(() => {
     if (!jwt) return
+    if (!checkingLanguages) return
     Language.getAllCurrentUser(jwt)
       .then((langs) => {
         setLanguages(langs)
@@ -47,8 +64,8 @@ const LanguageModal: React.FC = () => {
         }
         //setError(true)
       })
-    //.finally(() => setLoading(false))
-  }, [jwt])
+      .finally(() => dispatch(stopCheckingLanguages()))
+  }, [jwt, checkingLanguages])
 
   return (
     <Modal
@@ -69,6 +86,7 @@ const LanguageModal: React.FC = () => {
         >
           <ModalCloseButton />
           <Button
+            onClick={handleNewLanguage}
             position="absolute"
             bottom=".5em"
             right="1em"

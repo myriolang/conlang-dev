@@ -10,11 +10,26 @@ export interface ILanguage {
   tags: string[]
 }
 
+export interface INewLanguage {
+  name: string
+  slug: string
+  description: string
+}
+
 export const Language = {
   getAllCurrentUser: (jwt: string): Promise<ILanguage[]> =>
     new Promise((resolve, reject) => {
       api
         .get("/api/language", {
+          headers: { Authorization: `Bearer ${jwt}` }
+        })
+        .then((res) => resolve(res.data))
+        .catch((err) => reject(err))
+    }),
+  create: (jwt: string, language: INewLanguage): Promise<ILanguage> =>
+    new Promise((resolve, reject) => {
+      api
+        .post("/api/language", language, {
           headers: { Authorization: `Bearer ${jwt}` }
         })
         .then((res) => resolve(res.data))
