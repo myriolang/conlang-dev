@@ -46,7 +46,6 @@ const UsernameField: React.FC<Props> = ({
             username: value
           })
           .then((data) => {
-            console.log(data)
             setChecked(true)
             setLoading(false)
             setValid(data.data.valid)

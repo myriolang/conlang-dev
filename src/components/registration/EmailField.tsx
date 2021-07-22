@@ -46,7 +46,6 @@ const EmailField: React.FC<Props> = ({
             email: value
           })
           .then((data) => {
-            console.log(data)
             setChecked(true)
             setLoading(false)
             setValid(data.data.valid)

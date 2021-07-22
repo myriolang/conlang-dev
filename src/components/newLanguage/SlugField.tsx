@@ -69,7 +69,6 @@ const SlugField: React.FC<Props> = ({
             }
           )
           .then((data) => {
-            console.log(data)
             setChecked(true)
             setLoading(false)
             setValid(data.data.valid)
